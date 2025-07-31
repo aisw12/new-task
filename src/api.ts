@@ -1,12 +1,16 @@
 import axios from 'axios';
 import type { Movie } from './types/movie';
 
-const API_URL = 'http://localhost:5000/api'; // Adjust to match your backend
+const API_URL = 'http://localhost:5000/api'; 
 
-export const getMovies = async (): Promise<Movie[]> => {
-  const res = await axios.get<Movie[]>(API_URL);
-  return res.data;
+
+
+export const getMovies = async (page: number = 1) => {
+  const res = await fetch(`${API_URL}/movies?page=${page}`);
+  if (!res.ok) throw new Error('Failed to fetch movies');
+  return await res.json();
 };
+
 
 export const createMovie = async (movie: Omit<Movie, 'id'>): Promise<Movie> => {
   const res = await axios.post<Movie>(API_URL, movie);
@@ -43,7 +47,17 @@ export const loginUser = async (credentials: AuthCredentials): Promise<LoginResp
 };
 
 // REGISTER API
-export const registerUser = async (credentials: AuthCredentials): Promise<{ success: boolean }> => {
-  const res = await axios.post<{ success: boolean }>(`${API_URL}/auth/register`, credentials);
-  return res.data;
+export const registerUser = async (data: { email: string; password: string }) => {
+  const res = await fetch('http://localhost:5000/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.error || 'Signup failed');
+  }
+
+  return res.json();
 };

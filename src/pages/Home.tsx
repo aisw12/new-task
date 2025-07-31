@@ -8,7 +8,7 @@ const Home: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [editing, setEditing] = useState<Movie | null>(null);
   const [showForm, setShowForm] = useState(false);
-
+  
   const fetchData = async () => {
     const data = await getMovies();
     setMovies(data);
@@ -40,7 +40,14 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 px-4">
+    <div>
+        <header className="bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 text-white py-6 shadow-md">
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-3xl font-bold tracking-wide">🎬 My Favorite Movies & TV Shows</h1>
+        <p className="text-sm text-purple-100 mt-1">Manage your entertainment list with ease</p>
+      </div>
+    </header>
+    <div className="max-w-6xl mx-auto mt-8 px-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-gray-800">Favorite Movies & Shows</h1>
         {showForm ? (
@@ -82,7 +89,7 @@ const Home: React.FC = () => {
           onDelete={handleDelete}
         />
       )}
-    </div>
+    </div></div>
   );
 };
 

@@ -5,6 +5,7 @@ interface Props {
   movies: Movie[];
   onEdit: (movie: Movie) => void;
   onDelete: (id: number) => void;
+  onScrollEnd?: () => void; 
 }
 
 const MovieTable: React.FC<Props> = ({ movies, onEdit, onDelete }) => {
@@ -19,12 +20,12 @@ const MovieTable: React.FC<Props> = ({ movies, onEdit, onDelete }) => {
     });
   }, [movies, searchTerm, filterType]);
 
-  // Extract unique types for dropdown
+
   const movieTypes = useMemo(() => ['All', ...new Set(movies.map((m) => m.type))], [movies]);
 
+
   return (
-    <div className="space-y-4">
-      {/* Search and Filter Bar */}
+    <div className="space-y-4 mb-10">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
         <input
           type="text"
@@ -43,8 +44,6 @@ const MovieTable: React.FC<Props> = ({ movies, onEdit, onDelete }) => {
           ))}
         </select>
       </div>
-
-      {/* Table */}
       <div className="overflow-x-auto rounded-xl shadow-md bg-white">
         <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
           <thead className="bg-gradient-to-r from-blue-600 to-blue-400 text-white text-xs uppercase tracking-wider shadow-sm">

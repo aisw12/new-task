@@ -33,7 +33,7 @@ const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
   onSubmit(formData);
 
-  // ✅ Reset fields after save for both create & edit
+
   setFormData({
     title: '',
     type: 'Movie',
@@ -50,7 +50,6 @@ useEffect(() => {
     const { id, ...rest } = initialData;
     setFormData(rest);
   } else {
-    // ✅ Reset on initialData becoming null
     setFormData({
       title: '',
       type: 'Movie',
@@ -66,6 +65,7 @@ useEffect(() => {
 
 
   return (
+    <div  className="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-6 rounded-2xl shadow-md max-w-4xl mx-auto px-4 mb-10">
     <form
       onSubmit={handleSubmit}
       className="max-w-3xl mx-auto mt-8 p-8 bg-gradient-to-br from-white via-gray-50 to-gray-100 border border-gray-200 rounded-2xl shadow-xl"
@@ -179,6 +179,7 @@ useEffect(() => {
         )}
       </div>
     </form>
+    </div>
   );
 };
 
