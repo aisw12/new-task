@@ -5,8 +5,8 @@ const API_URL = 'http://localhost:5000/api';
 
 
 
-export const getMovies = async (page: number = 1) => {
-  const res = await fetch(`${API_URL}/movies?page=${page}`);
+export const getMovies = async () => {
+  const res = await fetch(`${API_URL}/movies`);
   if (!res.ok) throw new Error('Failed to fetch movies');
   return await res.json();
 };
